@@ -21,10 +21,13 @@ function NavBar() {
         <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link" to="/">Movies</Link>
+              <Link className="nav-link" to="/">Accueil</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/reviews">Reviews</Link>
+              <Link className="nav-link" to="/bars">Bars</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/commandes">Commandes</Link>
             </li>
           </ul>
         </div>
