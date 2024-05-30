@@ -10,7 +10,8 @@ const BiereForm = () => {
     description: '',
     degree: '',
     price: '',
-    bar_id: ''
+    bar_id: '',
+    rating: ''
   });
 
   useEffect(() => {
@@ -21,17 +22,19 @@ const BiereForm = () => {
           name: fetchedBiere.name,
           description: fetchedBiere.description,
           degree: fetchedBiere.degree,
-          price: fetchedBiere.price
+          price: fetchedBiere.price,
+          bar_id: fetchedBiere.bar_id,
+          rating: fetchedBiere.rating
         });
       };
-      loadMovie();
+      loadBiere();
     }
   }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setMovie(prevMovie => ({
-      ...prevMovie,
+    setBiere(prevBiere => ({
+      ...prevBiere,
       [name]: value
     }));
   };
@@ -39,9 +42,9 @@ const BiereForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (id) {
-      await updateMovie(id, movie);
+      await updateBiere(id, biere);
     } else {
-      await addMovie(movie);
+      await addBiere(biere);
     }
     navigate('/');
   };
@@ -49,49 +52,57 @@ const BiereForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
-        <label className="form-label">Title</label>
+        <label className="form-label">Name</label>
         <input
-          name="title"
+          name="name"
           className="form-control"
-          value={movie.title}
+          value={biere.name}
           onChange={handleChange}
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">Type</label>
+        <label className="form-label">Description : </label>
         <input
-          name="type"
+          name="description"
           className="form-control"
-          value={movie.type}
+          value={biere.description}
           onChange={handleChange}
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">Genre</label>
+        <label className="form-label">Degree : </label>
         <input
-          name="genre"
+          name="degree"
           className="form-control"
-          value={movie.genre}
+          value={biere.degree}
           onChange={handleChange}
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">Release Date</label>
+        <label className="form-label">Price : </label>
         <input
-          type="date"
-          name="release_date"
+          name="price"
           className="form-control"
-          value={movie.release_date}
+          value={biere.price}
           onChange={handleChange}
         />
       </div>
+      <div className="mb-3">
+        <label className="form-label">bar_id : </label>
+        <input
+          name="bar_id"
+          className="form-control"
+          value={biere.bar_id}
+          onChange={handleChange}
+        />
+        </div>
       <div className="mb-3">
         <label className="form-label">Rating</label>
         <input
           type="number"
           name="rating"
           className="form-control"
-          value={movie.rating}
+          value={biere.rating}
           onChange={handleChange}
         />
       </div>
@@ -100,4 +111,4 @@ const BiereForm = () => {
   );
 };
 
-export default MovieForm;
+export default BiereForm;

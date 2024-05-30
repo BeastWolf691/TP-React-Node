@@ -9,3 +9,5 @@ Front-end
 
 ************************
 [Travail en cours]
+
+la BDD est faite avec sqlite3 et non pas myadmin avec mysql2

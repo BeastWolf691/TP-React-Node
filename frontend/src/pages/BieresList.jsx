@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
-import { fetchReviews, deleteReview } from '../apiClient';
+import { fetchBieres, deleteBiere } from '../apiClient';
 
-const ReviewsList = () => {
-  const [reviews, setReviews] = useState([]);
+const BieresList = () => {
+  const [bieres, setBieres] = useState([]);
 
   useEffect(() => {
-    const loadReviews = async () => {
-      const reviewsData = await fetchReviews();
-      setReviews(reviewsData);
+    const loadBieres = async () => {
+      const bieresData = await fetchBieres();
+      setBieres(bieresData);
     };
-    loadReviews();
+    loadBieres();
   }, []);
 
   const handleDelete = async (id) => {
-    await deleteReview(id);
-    setReviews(reviews.filter(review => review.id !== id));
+    e.preventDefault();
+    await deleteBiere(id);
+    setBieres(bieres.filter(biere => biere.id !== id));
   };
 
   return (

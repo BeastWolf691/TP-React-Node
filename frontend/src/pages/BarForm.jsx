@@ -11,6 +11,7 @@ const BarForm = () => {
     tel: "",
     email: "",
     description: "",
+    rating: ""
   });
 
   useEffect(() => {
@@ -22,7 +23,8 @@ const BarForm = () => {
           address: fetchedBar.address,
           tel: fetchedBar.tel,
           email: fetchedBar.email,
-          description: fetchedBar.description
+          description: fetchedBar.description,
+          rating: fetchedBar.rating
         });
       };
       loadBar();
@@ -92,6 +94,16 @@ const BarForm = () => {
           name="description"
           className="form-control"
           value={bar.description}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Rating</label>
+        <input
+          type="number"
+          name="rating"
+          className="form-control"
+          value={bar.rating}
           onChange={handleChange}
         />
       </div>
