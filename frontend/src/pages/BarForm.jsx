@@ -68,31 +68,30 @@ const BarForm = () => {
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">Genre</label>
+        <label className="form-label">tél</label>
         <input
-          name="genre"
+          name="tel"
           className="form-control"
-          value={movie.genre}
+          value={bar.tel}
           onChange={handleChange}
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">Release Date</label>
+        <label className="form-label">Email</label>
         <input
-          type="date"
-          name="release_date"
+          type="email"
+          name="email"
           className="form-control"
-          value={movie.release_date}
+          value={bar.email}
           onChange={handleChange}
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">Rating</label>
+        <label className="form-label">Description :</label>
         <input
-          type="number"
-          name="rating"
+          name="description"
           className="form-control"
-          value={movie.rating}
+          value={bar.description}
           onChange={handleChange}
         />
       </div>
