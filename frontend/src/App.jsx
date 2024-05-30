@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import BarsList from './pages/BarsList';
+import BarForm from './pages/BarForm';
+import BieresList from './pages/BieresList';
+import BiereForm from './pages/BiereForm';
+import NavBar from './components/NavBar';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
+    <Router>
+      <NavBar />
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+        <section className="section">
+          <div className="container">
+            <Routes>
+              <Route path="/Bars" element={<BarsList />} />
+              <Route path="/bar/:id" element={<BarForm />} />
+              <Route path="/Bieres" element={<BieresList />} />
+              <Route path="/Biere/:id" element={<BiereForm />} />
 
-export default App
+            </Routes>
+          </div>
+        </section>
+      </div>
+    </Router>
+  );
+};
+
+export default App;

@@ -8,114 +8,124 @@ async function handleResponse(response) {
   return response.json();
 }
 
-export async function fetchMovies() {
+export async function fetchBars() {
   try {
-    const response = await fetch(`${API_BASE_URL}/movies`);
+    const response = await fetch(`${API_BASE_URL}/bars`);
     return await handleResponse(response);
   } catch (error) {
-    console.error('Failed to fetch movies:', error);
+    console.error('Failed to fetch bars:', error);
     throw error;
   }
 }
 
-export async function fetchMovie(id) {
+export async function fetchBar(id) {
   try {
-    const response = await fetch(`${API_BASE_URL}/movies/${id}`);
+    const response = await fetch(`${API_BASE_URL}/bars/${id}`);
     return await handleResponse(response);
   } catch (error) {
-    console.error(`Failed to fetch movie with id ${id}:`, error);
+    console.error(`Failed to fetch bar with id ${id}:`, error);
     throw error;
   }
 }
 
-export async function addMovie(movie) {
+export async function addBar(bar) {
   try {
-    const response = await fetch(`${API_BASE_URL}/movies`, {
+    const response = await fetch(`${API_BASE_URL}/bars`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(movie)
+      body: JSON.stringify(bar)
     });
     return await handleResponse(response);
   } catch (error) {
-    console.error('Failed to add movie:', error);
+    console.error('Failed to add bar:', error);
     throw error;
   }
 }
 
-export async function updateMovie(id, movie) {
+export async function updateBar(id, bar) {
   try {
-    const response = await fetch(`${API_BASE_URL}/movies/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/bars/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(movie)
+      body: JSON.stringify(bar)
     });
     return await handleResponse(response);
   } catch (error) {
-    console.error(`Failed to update movie with id ${id}:`, error);
+    console.error(`Failed to update bar with id ${id}:`, error);
     throw error;
   }
 }
 
-export async function deleteMovie(id) {
+export async function deleteBar(id) {
   try {
-    const response = await fetch(`${API_BASE_URL}/movies/${id}`, { method: 'DELETE' });
+    const response = await fetch(`${API_BASE_URL}/bars/${id}`, { method: 'DELETE' });
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.error || 'Failed to delete movie');
+      throw new Error(errorData.error || 'Failed to delete bar');
     }
   } catch (error) {
-    console.error(`Failed to delete movie with id ${id}:`, error);
+    console.error(`Failed to delete bar with id ${id}:`, error);
     throw error;
   }
 }
 
-export async function fetchReviews() {
+export async function fetchBieres() {
   try {
-    const response = await fetch(`${API_BASE_URL}/reviews`);
+    const response = await fetch(`${API_BASE_URL}/bieres`);
     return await handleResponse(response);
   } catch (error) {
-    console.error('Failed to fetch reviews:', error);
+    console.error('Failed to fetch bieres:', error);
     throw error;
   }
 }
 
-export async function addReview(review) {
+export async function fetchBiere(id) {
   try {
-    const response = await fetch(`${API_BASE_URL}/reviews`, {
+    const response = await fetch(`${API_BASE_URL}/bieres/${id}`);
+    return await handleResponse(response);
+  } catch (error) {
+    console.error(`Failed to fetch biere with id ${id}:`, error);
+    throw error;
+  }
+}
+
+export async function addBiere(biere) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/bieres`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(review)
+      body: JSON.stringify(biere)
     });
     return await handleResponse(response);
   } catch (error) {
-    console.error('Failed to add review:', error);
+    console.error('Failed to add biere:', error);
     throw error;
   }
 }
 
-export async function updateReview(id, review) {
+export async function updateBiere(id, biere) {
   try {
-    const response = await fetch(`${API_BASE_URL}/reviews/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/bieres/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(review)
+      body: JSON.stringify(biere)
     });
     return await handleResponse(response);
   } catch (error) {
-    console.error(`Failed to update review with id ${id}:`, error);
+    console.error(`Failed to update biere with id ${id}:`, error);
     throw error;
   }
 }
 
-export async function deleteReview(id) {
+export async function deleteBiere(id) {
   try {
-    const response = await fetch(`${API_BASE_URL}/reviews/${id}`, { method: 'DELETE' });
+    const response = await fetch(`${API_BASE_URL}/bieres/${id}`, { method: 'DELETE' });
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.error || 'Failed to delete review');
+      throw new Error(errorData.error || 'Failed to delete biere');
     }
   } catch (error) {
-    console.error(`Failed to delete review with id ${id}:`, error);
+    console.error(`Failed to delete biere with id ${id}:`, error);
     throw error;
   }
 }

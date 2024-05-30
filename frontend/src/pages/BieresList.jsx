@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
-import { fetchBieres, deleteBiere } from '../apiClient';
+import { fetchBieres, deleteBiere } from '../apiClient.js';
+import StarRating from '../components/StarRating.jsx';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
 
 const BieresList = () => {
   const [bieres, setBieres] = useState([]);
@@ -50,4 +54,4 @@ const BieresList = () => {
   );
 };
 
-export default ReviewsList;
+export default BieresList;

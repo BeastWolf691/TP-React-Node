@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { addBar, updateBar, fetchBar } from '../apiClient.jsx';
+import { addBar, updateBar, fetchBar } from '../apiClient.js';
 
 const BarForm = () => {
   const { id } = useParams();
@@ -112,4 +112,4 @@ const BarForm = () => {
   );
 };
 
-export default MovieForm;
+export default BarForm;
