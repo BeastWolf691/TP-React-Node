@@ -20,35 +20,31 @@ const BieresList = () => {
 
   return (
     <div className="container my-4">
-      <h2 className="mb-4">Reviews</h2>
-      <div className="table-responsive">
-        <table className="table table-striped table-hover">
-          <thead className="thead-dark">
-            <tr>
-              <th>Movie/Show ID</th>
-              <th>User</th>
-              <th>Review</th>
-              <th>Rating</th>
-              <th>Created At</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reviews.map(review => (
-              <tr key={review.id}>
-                <td>{review.movie_or_show_id}</td>
-                <td>{review.user}</td>
-                <td>{review.review}</td>
-                <td>{review.rating}</td>
-                <td>{review.created_at}</td>
-                <td>
-                  <button className="btn btn-info btn-sm me-2" onClick={() => setSelectedReview(review)}>Edit</button>
-                  <button className="btn btn-danger btn-sm" onClick={() => handleDelete(review.id)}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="row">
+        {bieres.map(biere => (
+          <div className="col-md-3 mb-4" key={biere.id}>
+            <Link to={'/biere/' + biere.id} className="card h-100">
+              <div className="text-center"><StarRating rating={biere.rating} /></div>
+              <div className="card-body">
+                <h5 className="card-title">{biere.name}</h5>
+                <p className="card-text text-muted small">
+                  <br />
+                  <span className='position-absolute' style={{ right: 8, bottom: 8 }} >
+                    <Link>
+                      <FontAwesomeIcon icon={faStar} />
+                    </Link>
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={(event) => handleDelete(biere.id, event)}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </span>
+                </p>
+              </div>
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
   );

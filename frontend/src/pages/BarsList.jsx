@@ -17,6 +17,13 @@ const BarsList = () => {
     loadBars();
   }, []);
 
+  const handleDelete = async (id, e) => {
+    e.preventDefault();
+    await deleteBar(id);
+    setBars(bars.filter(bar => bar.id !== id));
+  };
+
+
   return (
     <div className="container my-4">
       <div className="row">
@@ -26,6 +33,20 @@ const BarsList = () => {
               <div className="text-center"><StarRating rating={bar.rating} /></div>
               <div className="card-body">
                 <h5 className="card-title">{bar.name}</h5>
+                <p className="card-text text-muted small">
+                  <br />
+                  <span className='position-absolute' style={{ right: 8, bottom: 8 }} >
+                    <Link>
+                      <FontAwesomeIcon icon={faStar} />
+                    </Link>
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={(event) => handleDelete(bar.id, event)}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </span>
+                </p>
               </div>
             </Link>
           </div>
