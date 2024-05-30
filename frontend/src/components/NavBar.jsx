@@ -5,7 +5,7 @@ function NavBar() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          <strong>Rateflix</strong>
+          <strong>Bar'aton</strong>
         </Link>
         <button
           className="navbar-toggler"
