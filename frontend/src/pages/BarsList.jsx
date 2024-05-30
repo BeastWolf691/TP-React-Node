@@ -1,6 +1,6 @@
 // components/MoviesList.js
 import { useEffect, useState } from 'react';
-import { fetchBars, deleteBar } from '../apiClient.js';
+import { fetchBars, deleteBar } from '../apiClient.jsx';
 import StarRating from '../components/StarRating.jsx';
 import { Link } from 'react-router-dom';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
