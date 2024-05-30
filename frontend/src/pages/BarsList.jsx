@@ -17,12 +17,6 @@ const BarsList = () => {
     loadBars();
   }, []);
 
-  const handleDelete = async (id, e) => {
-    e.preventDefault();
-    await deleteBar(id);
-    setBars(bars.filter(bar => bar.id !== id));
-  };
-
   return (
     <div className="container my-4">
       <div className="row">
