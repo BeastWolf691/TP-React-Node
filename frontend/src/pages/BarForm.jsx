@@ -1,37 +1,38 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { addMovie, updateMovie, fetchMovie } from '../apiClient.js';
+import { addBar, updateBar, fetchBar } from '../apiClient.jsx';
 
-const MovieForm = () => {
+const BarForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [movie, setMovie] = useState({
-    title: '',
-    type: '',
-    genre: '',
-    release_date: '',
-    rating: ''
+  const [bar, setBar] = useState({
+    name: "",
+    address: "",
+    tel: "",
+    email: "",
+    description: "",
   });
 
   useEffect(() => {
     if (id) {
-      const loadMovie = async () => {
-        const fetchedMovie = await fetchMovie(id);
-        setMovie({
-          title: fetchedMovie.title,
-          genre: fetchedMovie.genre,
-          release_date: fetchedMovie.release_date.split('T')[0], // Convertir la date au format yyyy-MM-dd
-          rating: fetchedMovie.rating
+      const loadBar = async () => {
+        const fetchedBar = await fetchBar(id);
+        setBar({
+          name: fetchedBar.name,
+          address: fetchedBar.address,
+          tel: fetchedBar.tel,
+          email: fetchedBar.email,
+          description: fetchedBar.description
         });
       };
-      loadMovie();
+      loadBar();
     }
   }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setMovie(prevMovie => ({
-      ...prevMovie,
+    setBar(prevBar => ({
+      ...prevBar,
       [name]: value
     }));
   };
@@ -39,9 +40,9 @@ const MovieForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (id) {
-      await updateMovie(id, movie);
+      await updateBar(id, bar);
     } else {
-      await addMovie(movie);
+      await addBar(bar);
     }
     navigate('/');
   };
@@ -49,20 +50,20 @@ const MovieForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
-        <label className="form-label">Title</label>
+        <label className="form-label">Nom du bar</label>
         <input
-          name="title"
+          name="name"
           className="form-control"
-          value={movie.title}
+          value={bar.name}
           onChange={handleChange}
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">Type</label>
+        <label className="form-label">address</label>
         <input
-          name="type"
+          name="address"
           className="form-control"
-          value={movie.type}
+          value={bar.address}
           onChange={handleChange}
         />
       </div>
