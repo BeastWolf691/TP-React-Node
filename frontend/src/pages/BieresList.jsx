@@ -34,7 +34,10 @@ const BieresList = () => {
                 <p className="card-text text-muted small">
                   <br />
                   <span className='position-absolute' style={{ right: 8, bottom: 8 }} >
-                    <Link>
+                    <Link
+                      className="btn btn-success btn-sm me-1"
+                      to={'/bieres/' + bar.id}
+                    >
                       <FontAwesomeIcon icon={faStar} />
                     </Link>
                     <button
