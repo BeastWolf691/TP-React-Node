@@ -24,10 +24,10 @@ const Biere = sequelize.define('Biere',{
     bar_id: {
         type: DataTypes.INTEGER,
     },
-    rating: {
-        type: DataTypes.FLOAT,
+    // rating: {
+    //     type: DataTypes.FLOAT,
 
-    }
+    // }
 
 });
 Biere.belongsTo(Bar, { foreignKey: 'bar_id' });//biere appartien a au moins 1 bar

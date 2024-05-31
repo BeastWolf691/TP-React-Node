@@ -24,10 +24,10 @@ const Bar = sequelize.define('Bar',{
         type: DataTypes.TEXT,
         allowNull:false
     },
-    rating: {
-        type: DataTypes.FLOAT,
+    // rating: {
+    //     type: DataTypes.FLOAT,
 
-    }
+    // }
 
 });
  

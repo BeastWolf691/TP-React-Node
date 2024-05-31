@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchBars, deleteBar } from '../apiClient.js';
-import StarRating from '../components/StarRating.jsx';
+// import StarRating from '../components/StarRating.jsx';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
@@ -38,17 +38,13 @@ const BarsList = () => {
           <div className="col-md-3 mb-4" key={bar.id}>
             <Link to={'/bar/' + bar.id} className="card h-100">
               <div className="text-center">
-                <StarRating rating={bar.rating} />
+                {/* <StarRating rating={bar.rating} /> */}
               </div>
               <div className="card-body">
                 <h5 className="card-title">{bar.name}</h5>
                 <p className="card-text text-muted small">
                   <br />
-                  {bar.name}
                   <span className='position-absolute' style={{ right: 8, bottom: 8 }}>
-                    <Link to={'/bar/' + bar.id}>
-                      <FontAwesomeIcon icon={faStar} />
-                    </Link>
                     <button
                       className="btn btn-danger btn-sm"
                       onClick={(event) => handleDelete(bar.id, event)}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchBieres, deleteBiere } from '../apiClient.js';
-import StarRating from '../components/StarRating.jsx';
+// import StarRating from '../components/StarRating.jsx';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
@@ -28,18 +28,12 @@ const BieresList = () => {
         {bieres.map(biere => (
           <div className="col-md-3 mb-4" key={biere.id}>
             <Link to={'/biere/' + biere.id} className="card h-100">
-              <div className="text-center"><StarRating rating={biere.rating} /></div>
+              {/* <div className="text-center"><StarRating rating={biere.rating} /></div> */}
               <div className="card-body">
                 <h5 className="card-title">{biere.name}</h5>
                 <p className="card-text text-muted small">
                   <br />
                   <span className='position-absolute' style={{ right: 8, bottom: 8 }} >
-                    <Link
-                      className="btn btn-success btn-sm me-1"
-                      to={'/bieres/' + bar.id}
-                    >
-                      <FontAwesomeIcon icon={faStar} />
-                    </Link>
                     <button
                       className="btn btn-danger btn-sm"
                       onClick={(event) => handleDelete(biere.id, event)}
