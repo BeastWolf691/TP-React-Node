@@ -129,3 +129,64 @@ export async function deleteBiere(id) {
     throw error;
   }
 }
+
+export async function fetchCommandes() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/commandes`);
+    return await handleResponse(response);
+  } catch (error) {
+    console.error('Failed to fetch commandes:', error);
+    throw error;
+  }
+}
+
+export async function fetchCommande(id) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/commandes/${id}`);
+    return await handleResponse(response);
+  } catch (error) {
+    console.error(`Failed to fetch commande with id ${id}:`, error);
+    throw error;
+  }
+}
+
+export async function addCommande(commande) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/commandes`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(commande)
+    });
+    return await handleResponse(response);
+  } catch (error) {
+    console.error('Failed to add commande:', error);
+    throw error;
+  }
+}
+
+export async function updateCommande(id, commande) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/commandes/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(commande)
+    });
+    return await handleResponse(response);
+  } catch (error) {
+    console.error(`Failed to update commande with id ${id}:`, error);
+    throw error;
+  }
+}
+
+export async function deleteCommande(id) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/commandes/${id}`, { method: 'DELETE' });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to delete commande');
+    }
+  } catch (error) {
+    console.error(`Failed to delete commande with id ${id}:`, error);
+    throw error;
+  }
+}

@@ -20,7 +20,7 @@ const App = () => {
               <Route path={ROUTE_BIERELIST} element={<BieresList />} />
               <Route path={ROUTE_BIEREFORM_DYNAMIC} element={<BiereForm />} />
               <Route path={ROUTE_COMMANDELIST} element={<>CommandesList </>} />
-              <Route path={ROUTE_COMMANDEFORM} element={<> CommandesForm</>} />
+              <Route path={ROUTE_COMMANDEFORM} element={<CommandeForm />} />
             </Routes>
           </div>
         </section>

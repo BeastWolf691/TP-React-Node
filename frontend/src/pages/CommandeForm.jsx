@@ -1,40 +1,38 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { addBiere, updateBiere, fetchBiere } from '../apiClient.js';
+import { addCommande, updateCommande, fetchCommande } from '../apiClient.js';
 
-const BiereForm = () => {
+const CommandeForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [biere, setBiere] = useState({
+  const [commande, setCommande] = useState({
     name: '',
-    description: '',
-    degree: '',
     price: '',
     bar_id: '',
-    rating: ''
+    date: '',
+    status: ''
   });
 
   useEffect(() => {
     if (id) {
-      const loadBiere = async () => {
-        const fetchedBiere = await fetchBiere(id);
+      const loadCommande = async () => {
+        const fetchedCommande = await fetchCommande(id);
         setBiere({
-          name: fetchedBiere.name,
-          description: fetchedBiere.description,
-          degree: fetchedBiere.degree,
-          price: fetchedBiere.price,
-          bar_id: fetchedBiere.bar_id,
-          rating: fetchedBiere.rating
+          name: fetchedCommande.name,
+          price: fetchedCommande.price,
+          bar_id: fetchedCommande.bar_id,
+          date: fetchedCommande.date.split('T')[0],// Convertir la date au format yyyy-MM-dd
+          status: fetchedCommande.status
         });
       };
-      loadBiere();
+      loadCommande();
     }
   }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setBiere(prevBiere => ({
-      ...prevBiere,
+    setBiere(prevCommande => ({
+      ...prevCommande,
       [name]: value
     }));
   };
@@ -42,9 +40,9 @@ const BiereForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (id) {
-      await updateBiere(id, biere);
+      await updateCommande(id, commande);
     } else {
-      await addBiere(biere);
+      await addCommande(commande);
     }
     navigate('/');
   };
@@ -56,25 +54,7 @@ const BiereForm = () => {
         <input
           name="name"
           className="form-control"
-          value={biere.name}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">Description : </label>
-        <input
-          name="description"
-          className="form-control"
-          value={biere.description}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">Degrés : </label>
-        <input
-          name="degree"
-          className="form-control"
-          value={biere.degree}
+          value={commande.name}
           onChange={handleChange}
         />
       </div>
@@ -83,7 +63,7 @@ const BiereForm = () => {
         <input
           name="price"
           className="form-control"
-          value={biere.price}
+          value={commande.price}
           onChange={handleChange}
         />
       </div>
@@ -92,7 +72,25 @@ const BiereForm = () => {
         <input
           name="bar_id"
           className="form-control"
-          value={biere.bar_id}
+          value={commande.bar_id}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Date : </label>
+        <input
+          name="date"
+          className="form-control"
+          value={commande.date}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">status : </label>
+        <input
+          name="status"
+          className="form-control"
+          value={commande.status}
           onChange={handleChange}
         />
         </div>
@@ -102,7 +100,7 @@ const BiereForm = () => {
           type="number"
           name="rating"
           className="form-control"
-          value={biere.rating}
+          value={commande.rating}
           onChange={handleChange}
         />
       </div>
@@ -111,4 +109,4 @@ const BiereForm = () => {
   );
 };
 
-export default BiereForm;
+export default CommandeForm;
