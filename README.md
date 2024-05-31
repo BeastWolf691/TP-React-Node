@@ -11,3 +11,4 @@ Front-end
 [Travail en cours]
 
 la BDD est faite avec sqlite3 et non pas myadmin avec mysql2
+// ^ ont été enlevés du package.json afin d'utiliser uniquement ma version

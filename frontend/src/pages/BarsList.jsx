@@ -11,7 +11,7 @@ const BarsList = () => {
   useEffect(() => {
     const loadBars = async () => {
       try {
-        const barsData = await fetchBars(); // Correction mineure: `barsData` instead of `barsdata`
+        const barsData = await fetchBars();
         setBars(barsData);
       } catch (error) {
         console.error('Failed to fetch bars:', error);
@@ -36,7 +36,7 @@ const BarsList = () => {
       <div className="row">
         {bars.map(bar => (
           <div className="col-md-3 mb-4" key={bar.id}>
-            <Link to={'/bars/' + bar.id} className="card h-100">
+            <Link to={'/bar/' + bar.id} className="card h-100">
               <div className="text-center">
                 <StarRating rating={bar.rating} />
               </div>
@@ -46,7 +46,7 @@ const BarsList = () => {
                   <br />
                   {bar.name}
                   <span className='position-absolute' style={{ right: 8, bottom: 8 }}>
-                    <Link to={'/bars/' + bar.id}>
+                    <Link to={'/bar/' + bar.id}>
                       <FontAwesomeIcon icon={faStar} />
                     </Link>
                     <button

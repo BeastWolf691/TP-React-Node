@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { ROUTE_BARLIST, ROUTE_BIERELIST, ROUTE_COMMANDELIST } from '../constante';
 
 function NavBar() {
   return (
@@ -24,10 +25,13 @@ function NavBar() {
               <Link className="nav-link" to="/">Accueil</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/bar">Bars</Link>
+              <Link className="nav-link" to={ROUTE_BARLIST}>Bars</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/commande">Commandes</Link>
+              <Link className="nav-link" to={ROUTE_BIERELIST}>Bieres</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to={ROUTE_COMMANDELIST}>Commandes</Link>
             </li>
           </ul>
         </div>
