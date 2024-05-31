@@ -8,20 +8,21 @@ import NavBar from './components/NavBar';
 const App = () => {
   return (
     <Router>
-      <NavBar />
+      <NavBar >
       <div>
         <section className="section">
           <div className="container">
             <Routes>
               <Route path="/bars" element={<BarsList />} />
-              <Route path="/bars/:id" element={<BarForm />} />
-              <Route path="/bieres" element={<BieresList />} />
-              <Route path="/biere/:id" element={<BiereForm />} />
+              <Route path="/" element={<BarForm />} />
+              <Route path="/" element={<BieresList />} />
+              <Route path="/" element={<BiereForm />} />
 
             </Routes>
           </div>
         </section>
       </div>
+      </NavBar>
     </Router>
   );
 };
