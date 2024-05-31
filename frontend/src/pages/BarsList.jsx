@@ -44,6 +44,7 @@ const BarsList = () => {
                 <h5 className="card-title">{bar.name}</h5>
                 <p className="card-text text-muted small">
                   <br />
+                  {bar.name}
                   <span className='position-absolute' style={{ right: 8, bottom: 8 }}>
                     <Link to={'/bars/' + bar.id}>
                       <FontAwesomeIcon icon={faStar} />
