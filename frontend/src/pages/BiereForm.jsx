@@ -5,7 +5,8 @@ import { addBiere, updateBiere, fetchBiere } from '../apiClient.js';
 const BiereForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [biere, setBiere] = useState({
+  const [selectBiere, setSelectedBiere] = useState(null);
+  const [newbiere, setBiere] = useState({
     name: '',
     description: '',
     degree: '',
@@ -52,7 +53,7 @@ const BiereForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
-        <label className="form-label">Name</label>
+        <label className="form-label">Nom : </label>
         <input
           name="name"
           className="form-control"
@@ -70,7 +71,7 @@ const BiereForm = () => {
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">Degree : </label>
+        <label className="form-label">Degrés : </label>
         <input
           name="degree"
           className="form-control"
@@ -79,7 +80,7 @@ const BiereForm = () => {
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">Price : </label>
+        <label className="form-label">Prix : </label>
         <input
           name="price"
           className="form-control"
@@ -106,7 +107,7 @@ const BiereForm = () => {
           onChange={handleChange}
         />
       </div>
-      <button type="submit" className="btn btn-primary">Save</button>
+      <button type="submit" className="btn btn-primary">Enregistrement</button>
     </form>
   );
 };
