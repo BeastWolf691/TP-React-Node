@@ -107,7 +107,7 @@ const BarForm = () => {
           onChange={handleChange}
         />
       </div>
-      <button type="submit" className="btn btn-primary">Save</button>
+      <button type="submit" className="btn btn-primary">Enregistrement</button>
     </form>
   );
 };

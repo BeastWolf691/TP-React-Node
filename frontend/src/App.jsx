@@ -4,7 +4,9 @@ import BarForm from './pages/BarForm';
 import BieresList from './pages/BieresList';
 import BiereForm from './pages/BiereForm';
 import NavBar from './components/NavBar';
-import { ROUTE_BARLIST, ROUTE_BARFORM, ROUTE_BIEREFORM_DYNAMIC, ROUTE_BIERELIST, ROUTE_COMMANDEFORM, ROUTE_COMMANDELIST } from './constante';
+import { ROUTE_BARLIST, ROUTE_BARFORM_DYNAMIC, ROUTE_BIEREFORM_DYNAMIC, ROUTE_BIERELIST, ROUTE_COMMANDEFORM_DYNAMIC, ROUTE_COMMANDELIST} from './constante';
+import CommandeForm from './pages/CommandeForm';
+import CommandesList from './pages/CommandesList';
 
 const App = () => {
   return (
@@ -16,11 +18,11 @@ const App = () => {
             <Routes>
               <Route path='/' element={<>Main Menu</>} />
               <Route path={ROUTE_BARLIST} element={<BarsList />} />
-              <Route path={ROUTE_BARFORM} element={<BarForm />} />
+              <Route path={ROUTE_BARFORM_DYNAMIC} element={<BarForm />} />
               <Route path={ROUTE_BIERELIST} element={<BieresList />} />
               <Route path={ROUTE_BIEREFORM_DYNAMIC} element={<BiereForm />} />
-              <Route path={ROUTE_COMMANDELIST} element={<>CommandesList </>} />
-              <Route path={ROUTE_COMMANDEFORM} element={<CommandeForm />} />
+              <Route path={ROUTE_COMMANDELIST} element={<CommandesList />} />
+              <Route path={ROUTE_COMMANDEFORM_DYNAMIC} element={<CommandeForm />} />
             </Routes>
           </div>
         </section>

@@ -17,7 +17,7 @@ const CommandeForm = () => {
     if (id) {
       const loadCommande = async () => {
         const fetchedCommande = await fetchCommande(id);
-        setBiere({
+        setCommande({
           name: fetchedCommande.name,
           price: fetchedCommande.price,
           bar_id: fetchedCommande.bar_id,
