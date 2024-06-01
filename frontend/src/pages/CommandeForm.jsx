@@ -51,6 +51,10 @@ const CommandeForm = () => {
     navigate('/commandelist');
   };
 
+  const handleBack = () => {
+    navigate('/commandelist'); // permet de revenir sur la page précèdente
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
@@ -98,8 +102,26 @@ const CommandeForm = () => {
           onChange={handleChange}
         />
       </div>
+      <div className="mb-3">
+        <label className="form-label">Prix de la bière : </label>
+        <input
+          name="biere_price"
+          className="form-control"
+          value={commande.biere_price}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Évaluation : </label>
+        <input
+          name="rating"
+          className="form-control"
+          value={commande.rating}
+          onChange={handleChange}
+        />
+      </div>
       <button type="submit" className="btn btn-primary">Enregistrement</button>
-
+      <button type="button" className="btn btn-secondary" onClick={handleBack}>Retour</button>
     </form>
   );
 };

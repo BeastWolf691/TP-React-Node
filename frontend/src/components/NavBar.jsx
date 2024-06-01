@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ROUTE_BARLIST, ROUTE_BIERECOMMANDELIST, ROUTE_BIERELIST, ROUTE_COMMANDELIST } from '../constante';
+import { ROUTE_BARLIST, ROUTE_BIERELIST, ROUTE_COMMANDELIST } from '../constante';
 
 function NavBar() {
   return (
@@ -34,7 +34,7 @@ function NavBar() {
               <Link className="nav-link" to={ROUTE_COMMANDELIST}>Commandes</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to={ROUTE_BIERECOMMANDELIST}>Suivi des bières</Link>
+              {/* <Link className="nav-link" to={ROUTE_BIERECOMMANDELIST}>Suivi des bières</Link> */}
             </li>
           </ul>
         </div>

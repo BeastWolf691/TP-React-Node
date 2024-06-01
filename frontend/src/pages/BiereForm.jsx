@@ -49,6 +49,10 @@ const BiereForm = () => {
     navigate('/biereList');
   };
 
+  const handleBack = () => {
+    navigate('/biereList'); // renvoie sur la page précèdente initialement mais précision sur la page liste
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
@@ -107,6 +111,7 @@ const BiereForm = () => {
         />
       </div>
       <button type="submit" className="btn btn-primary">Enregistrement</button>
+      <button type="button" className="btn btn-secondary" onClick={handleBack}>Retour</button>
     </form>
   );
 };

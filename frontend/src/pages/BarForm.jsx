@@ -46,7 +46,11 @@ const BarForm = () => {
     } else {
       await addBar(bar);
     }
-    navigate('/');
+    navigate('/bars');
+  };
+
+  const handleBack = () => {
+    navigate('/bars'); // renvoie sur la page précèdente initialement mais précision sur la page liste
   };
 
   return (
@@ -61,7 +65,7 @@ const BarForm = () => {
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">address</label>
+        <label className="form-label">Address</label>
         <input
           name="address"
           className="form-control"
@@ -70,7 +74,7 @@ const BarForm = () => {
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">tél</label>
+        <label className="form-label">Tél</label>
         <input
           name="tel"
           className="form-control"
@@ -108,6 +112,7 @@ const BarForm = () => {
         />
       </div>
       <button type="submit" className="btn btn-primary">Enregistrement</button>
+      <button type="button" className="btn btn-secondary" onClick={handleBack}>Retour</button>
     </form>
   );
 };
