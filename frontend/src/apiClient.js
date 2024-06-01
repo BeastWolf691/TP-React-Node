@@ -191,7 +191,7 @@ export async function deleteCommande(id) {
   }
 }
 
-export async function fetchBiereCommande() {
+export async function fetchBieresCommandes() {
   try {
     const response = await fetch(`${API_BASE_URL}/biere_commande`);
     return await handleResponse(response);
@@ -201,6 +201,15 @@ export async function fetchBiereCommande() {
   }
 }
 
+export async function fetchBiereCommande() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/biere_commandes`); // Mise à jour de l'URL
+    return await handleResponse(response);
+  } catch (error) {
+    console.error('Failed to fetch bieres commandes:', error);
+    throw error;
+  }
+}
 
 // Correction de l'URL pour addBiereToCommande
 export async function addBiereToCommande(commandeId, biereId) {
@@ -213,6 +222,19 @@ export async function addBiereToCommande(commandeId, biereId) {
     return await handleResponse(response);
   } catch (error) {
     console.error('Failed to add biere to commande:', error);
+    throw error;
+  }
+}
+export async function updateBiereCommande(id, biere_commandes) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/biere_commandes/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(commande)
+    });
+    return await handleResponse(response);
+  } catch (error) {
+    console.error(`Failed to update commande with id ${id}:`, error);
     throw error;
   }
 }
