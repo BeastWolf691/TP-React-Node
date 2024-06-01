@@ -11,6 +11,15 @@ router.get('/bars/:bar_id/commandes', async (req, res) => {//liste des commandes
     }
 })
 
+router.get('/biere/:id/commandes', async (req, res) => {//liste des commandes d'une biere
+    try {
+        const commande = await Commande.findAll({where: req.params});
+        res.json(commande);
+    } catch (err) {
+        res.status(500).json({ error: err.message })
+    }
+})
+
 router.get('/commandes/:id', async (req, res) => {
     try {
         const commande = await Commande.findByPk(req.params.id);
