@@ -52,7 +52,7 @@ const BiereForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
-        <label className="form-label">Nom : </label>
+        <label className="form-label">Nom de la bière : </label>
         <input
           name="name"
           className="form-control"
