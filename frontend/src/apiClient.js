@@ -91,14 +91,14 @@ export async function fetchBiere(id) {
 
 export async function addBiere(biere) {
   try {
-    const response = await fetch(`${API_BASE_URL}/bars/:id/bieres/`, {
+    const response = await fetch(`${API_BASE_URL}/bieres`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(biere)
     });
     return await handleResponse(response);
   } catch (error) {
-    console.error('Failed to add bieres:', error);
+    console.error('Failed to add biere:', error);
     throw error;
   }
 }
@@ -152,15 +152,6 @@ export async function fetchCommande(id) {
 
 export async function addCommande(commande) {
   try {
-    // Récupérer les détails de la bière associée à la commande
-    const biereDetails = await fetchBiere(commande.biere_id);
-    if (!biereDetails) throw new Error('Invalid beer ID');
-    const bierePrice = biereDetails.price;
-
-    // Mettre à jour le prix de la bière dans la commande
-    commande.price = bierePrice;
-
-    // Envoyer la commande au serveur
     const response = await fetch(`${API_BASE_URL}/commandes`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -175,14 +166,6 @@ export async function addCommande(commande) {
 
 export async function updateCommande(id, commande) {
   try {
-    // Récupérer les détails de la bière associée à la commande
-    const biereDetails = await fetchBiere(commande.biere_id);
-    const bierePrice = biereDetails.price;
-
-    // Mettre à jour le prix de la bière dans la commande
-    commande.price = bierePrice;
-
-    // Envoyer la commande mise à jour au serveur
     const response = await fetch(`${API_BASE_URL}/commandes/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -208,38 +191,65 @@ export async function deleteCommande(id) {
   }
 }
 
-// Fonction pour récupérer la liste des bieresCommandes
-export const fetchBieresCommandes = async () => {
-  const response = await fetch('/biere_commande');
-  if (!response.ok) {
-      throw new Error('Failed to fetch bieresCommandes');
+export async function fetchBieresCommandes() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/biere_commande`);
+    return await handleResponse(response);
+  } catch (error) {
+    console.error('Failed to fetch bieres commandes:', error);
+    throw error;
   }
-  return await response.json();
-};
+}
 
-// Fonction pour ajouter une bière à une commande
-export const addBiereToCommande = async (commandeId, biereId) => {
-  const response = await fetch(`/biere_commande/commandes/${commandeId}/bieres/${biereId}`, {
+export async function fetchBiereCommande(id) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/biere_commande/${id}`);
+    return await handleResponse(response);
+  } catch (error) {
+    console.error(`Failed to fetch commande with id ${id}:`, error);
+    throw error;
+  }
+}
+
+export async function addBiereToCommande(commandeId, biereId) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/bieres_commandes`, {
       method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      }
-  });
-  if (!response.ok) {
-      throw new Error('Failed to add biere to commande');
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ commande_id: commandeId, biere_id: biereId })
+    });
+    return await handleResponse(response);
+  } catch (error) {
+    console.error('Failed to add biere to commande:', error);
+    throw error;
   }
-  return await response.json();
-};
+}
 
-// Fonction pour supprimer une bière d'une commande
-export const removeBiereFromCommande = async (id) => {
-  const response = await fetch(`/biere_commande/${id}`, {
-      method: 'DELETE',
-      headers: {
-          'Content-Type': 'application/json'
-      }
-  });
-  if (!response.ok) {
-      throw new Error('Failed to remove biere from commande');
+export async function removeBiereFromCommande(biereCommandeId) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/bieres_commandes/${biereCommandeId}`, {
+      method: 'DELETE'
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to remove biere from commande');
+    }
+  } catch (error) {
+    console.error(`Failed to remove biere from commande with id ${biereCommandeId}:`, error);
+    throw error;
   }
-};
+}
+
+export async function updateBiereCommande(id, biere_commande) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/biere_commande/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(biere_commande)
+    });
+    return await handleResponse(response);
+  } catch (error) {
+    console.error(`Failed to update commande with id ${id}:`, error);
+    throw error;
+  }
+}

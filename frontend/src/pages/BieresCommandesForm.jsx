@@ -1,123 +1,82 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { fetchBiereCommande, addBiereToCommande, updateBiereCommande } from '../apiClient.js';
 
 const BieresCommandesForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [biereCommande, setbiereCommande] = useState({
+  const [biereCommande, setBiereCommande] = useState({
     biere_id: '',
     commande_id: '',
   });
 
   useEffect(() => {
     if (id) {
-      const loadCommande = async () => {
-        const fetchedCommande = await fetchCommande(id);
-        setCommande({
-          name: fetchedCommande.name,
-          price: fetchedCommande.price,
-          bar_id: fetchedCommande.bar_id,
-          date: fetchedCommande.date.split('T')[0],
-          status: fetchedCommande.status,
-          biere_price: fetchedCommande.biere_price,
-          rating: fetchedCommande.rating
-        });
+      const loadBiereCommande = async () => {
+        try {
+          const fetchedBiereCommande = await fetchBiereCommande(id);
+          setBiereCommande({
+            biere_id: fetchedBiereCommande.biere_id,
+            commande_id: fetchedBiereCommande.commande_id,
+          });
+        } catch (error) {
+          console.error('Failed to load biere commande:', error);
+        }
       };
-      loadCommande();
+      loadBiereCommande();
     }
   }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCommande(prevCommande => ({
-      ...prevCommande,
+    setBiereCommande(prevBiereCommande => ({
+      ...prevBiereCommande,
       [name]: value
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (id) {
-      await updateCommande(id, commande);
-    } else {
-      await addCommande(commande);
+    try {
+      if (id) {
+        await updateBiereCommande(id, biereCommande);
+      } else {
+        await addBiereToCommande(biereCommande.commande_id, biereCommande.biere_id);
+      }
+      navigate('/bierecommandelist');
+    } catch (error) {
+      console.error('Failed to save biere commande:', error);
     }
-    navigate('/commandelist');
   };
 
   const handleBack = () => {
-    navigate('/commandelist'); // permet de revenir sur la page précèdente
+    navigate('/bierecommandelist');
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
-        <label className="form-label">Nom : </label>
+        <label className="form-label">ID de la bière : </label>
         <input
-          name="name"
+          name="biere_id"
           className="form-control"
-          value={commande.name}
+          value={biereCommande.biere_id}
           onChange={handleChange}
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">Prix : </label>
+        <label className="form-label">ID de la commande : </label>
         <input
-          name="price"
+          name="commande_id"
           className="form-control"
-          value={commande.price}
+          value={biereCommande.commande_id}
           onChange={handleChange}
         />
       </div>
-      <div className="mb-3">
-        <label className="form-label">bar_id : </label>
-        <input
-          name="bar_id"
-          className="form-control"
-          value={commande.bar_id}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">Date : </label>
-        <input
-          name="date"
-          className="form-control"
-          value={commande.date}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">Status : </label>
-        <input
-          name="status"
-          className="form-control"
-          value={commande.status}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">Prix de la bière : </label>
-        <input
-          name="biere_price"
-          className="form-control"
-          value={commande.biere_price}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">Évaluation : </label>
-        <input
-          name="rating"
-          className="form-control"
-          value={commande.rating}
-          onChange={handleChange}
-        />
-      </div>
-      <button type="submit" className="btn btn-primary">Enregistrement</button>
+      <button type="submit" className="btn btn-primary">Enregistrer</button>
       <button type="button" className="btn btn-secondary" onClick={handleBack}>Retour</button>
     </form>
   );
 };
 
-export default CommandeForm;
+export default BieresCommandesForm;
