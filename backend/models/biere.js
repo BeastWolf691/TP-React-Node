@@ -30,7 +30,7 @@ const Biere = sequelize.define('Biere',{
     // }
 
 });
-Biere.belongsTo(Bar, { foreignKey: 'bar_id' });//biere appartien a au moins 1 bar
-Bar.hasMany(Biere, { foreignKey: 'bar_id' });//un bar a plusieurs biere
+// Biere.belongsTo(Bar, { foreignKey: 'bar_id' });//biere appartien a au moins 1 bar
+// Bar.hasMany(Biere, { foreignKey: 'bar_id' });//un bar a plusieurs biere
 
 export default Biere;

@@ -12,6 +12,5 @@ const Biere_commande = sequelize.define('Biere_Commande',{
     },
 
 });
-Biere_commande.belongsTo(Commande, { foreignKey: 'commande_id' }); // 'commande_id' est la clé étrangère dans la table BiereCommande
 
 export default Biere_commande;

@@ -48,7 +48,7 @@ const CommandeForm = () => {
     } else {
       await addCommande(commande);
     }
-    navigate('/');
+    navigate('/commandelist');
   };
 
   return (

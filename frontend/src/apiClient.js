@@ -91,14 +91,14 @@ export async function fetchBiere(id) {
 
 export async function addBiere(biere) {
   try {
-    const response = await fetch(`${API_BASE_URL}/bieres`, {
+    const response = await fetch(`${API_BASE_URL}/bars/:id/bieres/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(biere)
     });
     return await handleResponse(response);
   } catch (error) {
-    console.error('Failed to add biere:', error);
+    console.error('Failed to add bieres:', error);
     throw error;
   }
 }
@@ -154,6 +154,7 @@ export async function addCommande(commande) {
   try {
     // Récupérer les détails de la bière associée à la commande
     const biereDetails = await fetchBiere(commande.biere_id);
+    if (!biereDetails) throw new Error('Invalid beer ID');
     const bierePrice = biereDetails.price;
 
     // Mettre à jour le prix de la bière dans la commande
@@ -206,3 +207,4 @@ export async function deleteCommande(id) {
     throw error;
   }
 }
+

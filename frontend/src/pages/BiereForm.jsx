@@ -46,7 +46,7 @@ const BiereForm = () => {
     } else {
       await addBiere(biere);
     }
-    navigate('/');
+    navigate('/biereList');
   };
 
   return (
