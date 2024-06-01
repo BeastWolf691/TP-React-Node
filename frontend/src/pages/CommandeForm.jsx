@@ -10,7 +10,8 @@ const CommandeForm = () => {
     price: '',
     bar_id: '',
     date: '',
-    status: ''
+    status: '',
+    rating: ''
   });
 
   useEffect(() => {
@@ -21,8 +22,9 @@ const CommandeForm = () => {
           name: fetchedCommande.name,
           price: fetchedCommande.price,
           bar_id: fetchedCommande.bar_id,
-          date: fetchedCommande.date.split('T')[0],// Convertir la date au format yyyy-MM-dd
-          status: fetchedCommande.status
+          date: fetchedCommande.date.split('T')[0],
+          status: fetchedCommande.status,
+          rating: fetchedCommande.rating
         });
       };
       loadCommande();
@@ -31,7 +33,7 @@ const CommandeForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setBiere(prevCommande => ({
+    setCommande(prevCommande => ({
       ...prevCommande,
       [name]: value
     }));
@@ -59,6 +61,24 @@ const CommandeForm = () => {
         />
       </div>
       <div className="mb-3">
+        <label className="form-label">Description : </label>
+        <input
+          name="description"
+          className="form-control"
+          value={commande.description}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Degrés : </label>
+        <input
+          name="degree"
+          className="form-control"
+          value={commande.degree}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="mb-3">
         <label className="form-label">Prix : </label>
         <input
           name="price"
@@ -76,35 +96,8 @@ const CommandeForm = () => {
           onChange={handleChange}
         />
       </div>
-      <div className="mb-3">
-        <label className="form-label">Date : </label>
-        <input
-          name="date"
-          className="form-control"
-          value={commande.date}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">status : </label>
-        <input
-          name="status"
-          className="form-control"
-          value={commande.status}
-          onChange={handleChange}
-        />
-        </div>
-      <div className="mb-3">
-        <label className="form-label">Rating</label>
-        <input
-          type="number"
-          name="rating"
-          className="form-control"
-          value={commande.rating}
-          onChange={handleChange}
-        />
-      </div>
       <button type="submit" className="btn btn-primary">Enregistrement</button>
+
     </form>
   );
 };
