@@ -208,3 +208,38 @@ export async function deleteCommande(id) {
   }
 }
 
+// Fonction pour récupérer la liste des bieresCommandes
+export const fetchBieresCommandes = async () => {
+  const response = await fetch('/biere_commande');
+  if (!response.ok) {
+      throw new Error('Failed to fetch bieresCommandes');
+  }
+  return await response.json();
+};
+
+// Fonction pour ajouter une bière à une commande
+export const addBiereToCommande = async (commandeId, biereId) => {
+  const response = await fetch(`/biere_commande/commandes/${commandeId}/bieres/${biereId}`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  });
+  if (!response.ok) {
+      throw new Error('Failed to add biere to commande');
+  }
+  return await response.json();
+};
+
+// Fonction pour supprimer une bière d'une commande
+export const removeBiereFromCommande = async (id) => {
+  const response = await fetch(`/biere_commande/${id}`, {
+      method: 'DELETE',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  });
+  if (!response.ok) {
+      throw new Error('Failed to remove biere from commande');
+  }
+};

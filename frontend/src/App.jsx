@@ -17,7 +17,7 @@ const App = () => {
         <section className="section">
           <div className="container">
             <Routes>
-              <Route path='/' element={<>Main Menu</>} />
+              <Route path='/' element={<></>} />
               <Route path={ROUTE_BARLIST} element={<BarsList />} />
               <Route path={ROUTE_BARFORM_DYNAMIC} element={<BarForm />} />
               <Route path={ROUTE_BIERELIST} element={<BieresList />} />
