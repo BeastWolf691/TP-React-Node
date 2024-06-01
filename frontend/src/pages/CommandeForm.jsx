@@ -11,6 +11,7 @@ const CommandeForm = () => {
     bar_id: '',
     date: '',
     status: '',
+    biere_price: '',
     rating: ''
   });
 
@@ -24,6 +25,7 @@ const CommandeForm = () => {
           bar_id: fetchedCommande.bar_id,
           date: fetchedCommande.date.split('T')[0],
           status: fetchedCommande.status,
+          biere_price: fetchedCommande.biere_price,
           rating: fetchedCommande.rating
         });
       };
@@ -61,24 +63,6 @@ const CommandeForm = () => {
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">Description : </label>
-        <input
-          name="description"
-          className="form-control"
-          value={commande.description}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">Degrés : </label>
-        <input
-          name="degree"
-          className="form-control"
-          value={commande.degree}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-3">
         <label className="form-label">Prix : </label>
         <input
           name="price"
@@ -93,6 +77,24 @@ const CommandeForm = () => {
           name="bar_id"
           className="form-control"
           value={commande.bar_id}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Date : </label>
+        <input
+          name="date"
+          className="form-control"
+          value={commande.date}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Status : </label>
+        <input
+          name="status"
+          className="form-control"
+          value={commande.status}
           onChange={handleChange}
         />
       </div>

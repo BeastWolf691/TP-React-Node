@@ -152,6 +152,14 @@ export async function fetchCommande(id) {
 
 export async function addCommande(commande) {
   try {
+    // Récupérer les détails de la bière associée à la commande
+    const biereDetails = await fetchBiere(commande.biere_id);
+    const bierePrice = biereDetails.price;
+
+    // Mettre à jour le prix de la bière dans la commande
+    commande.price = bierePrice;
+
+    // Envoyer la commande au serveur
     const response = await fetch(`${API_BASE_URL}/commandes`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -166,6 +174,14 @@ export async function addCommande(commande) {
 
 export async function updateCommande(id, commande) {
   try {
+    // Récupérer les détails de la bière associée à la commande
+    const biereDetails = await fetchBiere(commande.biere_id);
+    const bierePrice = biereDetails.price;
+
+    // Mettre à jour le prix de la bière dans la commande
+    commande.price = bierePrice;
+
+    // Envoyer la commande mise à jour au serveur
     const response = await fetch(`${API_BASE_URL}/commandes/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },

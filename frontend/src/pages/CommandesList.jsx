@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+// commandelist.jsx
+import React, { useEffect, useState } from 'react';
 import { fetchCommandes, deleteCommande, fetchBieres, fetchBars } from '../apiClient.js';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -28,15 +29,6 @@ const CommandesList = () => {
     setCommandes(commandesList.filter(commande => commande.id !== id));
   };
 
-  const getBiereDetails = (biereId) => {
-    const biere = bieresList.find(biere => biere.id === biereId);
-    if (biere) {
-      return { name: biere.name, price: biere.price };
-    }
-    console.error(`Bière avec ID ${biereId} non trouvée`);
-    return { name: 'Unknown', price: 'Unknown' };
-  };
-
   const getBarName = (barId) => {
     const bar = barsList.find(bar => bar.id === barId);
     return bar ? bar.name : 'Unknown';
@@ -49,16 +41,17 @@ const CommandesList = () => {
       </div>
       <div className="row">
         {commandesList.map(commande => {
-          const biereDetails = getBiereDetails(commande.biere_id);
           return (
             <div className="col-md-3 mb-4" key={commande.id}>
               <div className="card h-100">
                 <div className="card-body">
                   <h3 className="card-title">Commande : {commande.id}</h3>
                   <p className='description'>
-                    Nom de la Bière : {biereDetails.name}<br/>
-                    Prix : {biereDetails.price}€<br/>
+                    Nom : {commande.name}<br/>
+                    Prix : {commande.price}€<br/>
                     Nom du Bar : {getBarName(commande.bar_id)}<br/>
+                    Date : {commande.date}<br/>
+                    Status : {commande.status}<br/>
                   </p>
                   <p className="card-text text-muted small">
                     <br />
