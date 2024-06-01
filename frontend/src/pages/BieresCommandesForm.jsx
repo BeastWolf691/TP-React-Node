@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchBiereCommande, addBiereToCommande, updateBiereCommande } from '../apiClient.js';
+import { fetchBiereCommande, addBiereToCommande, updateBiereCommande, fetchBieres, fetchCommandes } from '../apiClient.js';
 
 const BieresCommandesForm = () => {
   const { id } = useParams();
@@ -9,22 +9,28 @@ const BieresCommandesForm = () => {
     biere_id: '',
     commande_id: '',
   });
+  const [bieresList, setBieres] = useState([]);
+  const [commandesList, setCommandes] = useState([]);
 
   useEffect(() => {
-    if (id) {
-      const loadBiereCommande = async () => {
-        try {
+    const loadData = async () => {
+      try {
+        if (id) {
           const fetchedBiereCommande = await fetchBiereCommande(id);
           setBiereCommande({
             biere_id: fetchedBiereCommande.biere_id,
             commande_id: fetchedBiereCommande.commande_id,
           });
-        } catch (error) {
-          console.error('Failed to load biere commande:', error);
         }
-      };
-      loadBiereCommande();
-    }
+        const bieresData = await fetchBieres();
+        const commandesData = await fetchCommandes();
+        setBieres(bieresData);
+        setCommandes(commandesData);
+      } catch (error) {
+        console.error('Failed to load data:', error);
+      }
+    };
+    loadData();
   }, [id]);
 
   const handleChange = (e) => {
@@ -56,22 +62,36 @@ const BieresCommandesForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
-        <label className="form-label">ID de la bière : </label>
-        <input
+        <label className="form-label">Bière : </label>
+        <select
           name="biere_id"
-          className="form-control"
+          className="form-select"
           value={biereCommande.biere_id}
           onChange={handleChange}
-        />
+        >
+          <option value="">Sélectionner une bière</option>
+          {bieresList.map(biere => (
+            <option key={biere.id} value={biere.id}>
+              {biere.name} (ID: {biere.id})
+            </option>
+          ))}
+        </select>
       </div>
       <div className="mb-3">
-        <label className="form-label">ID de la commande : </label>
-        <input
+        <label className="form-label">Commande : </label>
+        <select
           name="commande_id"
-          className="form-control"
+          className="form-select"
           value={biereCommande.commande_id}
           onChange={handleChange}
-        />
+        >
+          <option value="">Sélectionner une commande</option>
+          {commandesList.map(commande => (
+            <option key={commande.id} value={commande.id}>
+              {commande.name} (ID: {commande.id})
+            </option>
+          ))}
+        </select>
       </div>
       <button type="submit" className="btn btn-primary">Enregistrer</button>
       <button type="button" className="btn btn-secondary" onClick={handleBack}>Retour</button>

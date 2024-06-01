@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+// CommandeForm.jsx
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { addCommande, updateCommande, fetchCommande } from '../apiClient.js';
+import BiereCommandeList from './BieresCommandesList.jsx';
 
 const CommandeForm = () => {
   const { id } = useParams();
@@ -11,34 +13,24 @@ const CommandeForm = () => {
     bar_id: '',
     date: '',
     status: '',
-    biere_price: '',
-    rating: ''
+    beers: [], // Tableau des bières commandées avec leurs quantités
   });
 
   useEffect(() => {
     if (id) {
       const loadCommande = async () => {
         const fetchedCommande = await fetchCommande(id);
-        setCommande({
-          name: fetchedCommande.name,
-          price: fetchedCommande.price,
-          bar_id: fetchedCommande.bar_id,
-          date: fetchedCommande.date.split('T')[0],
-          status: fetchedCommande.status,
-          biere_price: fetchedCommande.biere_price,
-          rating: fetchedCommande.rating
-        });
+        setCommande(fetchedCommande);
       };
       loadCommande();
     }
   }, [id]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCommande(prevCommande => ({
-      ...prevCommande,
-      [name]: value
-    }));
+  // Fonction pour calculer le prix total en fonction des bières commandées
+  const calculateTotalPrice = () => {
+    return commande.beers.reduce((total, beer) => {
+      return total + (beer.quantity * beer.price);
+    }, 0);
   };
 
   const handleSubmit = async (e) => {
@@ -52,7 +44,7 @@ const CommandeForm = () => {
   };
 
   const handleBack = () => {
-    navigate('/commandelist'); // permet de revenir sur la page précèdente
+    navigate('/commandelist');
   };
 
   return (
@@ -63,16 +55,7 @@ const CommandeForm = () => {
           name="name"
           className="form-control"
           value={commande.name}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">Prix : </label>
-        <input
-          name="price"
-          className="form-control"
-          value={commande.price}
-          onChange={handleChange}
+          onChange={(e) => setCommande({ ...commande, name: e.target.value })}
         />
       </div>
       <div className="mb-3">
@@ -81,16 +64,17 @@ const CommandeForm = () => {
           name="bar_id"
           className="form-control"
           value={commande.bar_id}
-          onChange={handleChange}
+          onChange={(e) => setCommande({ ...commande, bar_id: e.target.value })}
         />
       </div>
       <div className="mb-3">
         <label className="form-label">Date : </label>
         <input
           name="date"
+          type="date"
           className="form-control"
           value={commande.date}
-          onChange={handleChange}
+          onChange={(e) => setCommande({ ...commande, date: e.target.value })}
         />
       </div>
       <div className="mb-3">
@@ -99,27 +83,22 @@ const CommandeForm = () => {
           name="status"
           className="form-control"
           value={commande.status}
-          onChange={handleChange}
+          onChange={(e) => setCommande({ ...commande, status: e.target.value })}
         />
       </div>
+      {/* Composant pour sélectionner les bières commandées */}
+      <BiereCommandeList updateBeers={beers => setCommande(prevCommande => ({ ...prevCommande, beers }))} selectedBeers={commande.beers} />
+      {/* Champ de prix total */}
       <div className="mb-3">
-        <label className="form-label">Prix de la bière : </label>
+        <label className="form-label">Prix total : </label>
         <input
-          name="biere_price"
+          name="price"
           className="form-control"
-          value={commande.biere_price}
-          onChange={handleChange}
+          value={calculateTotalPrice()}
+          readOnly
         />
       </div>
-      <div className="mb-3">
-        <label className="form-label">Évaluation : </label>
-        <input
-          name="rating"
-          className="form-control"
-          value={commande.rating}
-          onChange={handleChange}
-        />
-      </div>
+      {/* Boutons de soumission et de retour */}
       <button type="submit" className="btn btn-primary">Enregistrement</button>
       <button type="button" className="btn btn-secondary" onClick={handleBack}>Retour</button>
     </form>

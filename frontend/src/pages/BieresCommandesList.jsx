@@ -12,7 +12,6 @@ const BieresCommandesList = () => {
     const [selectedBiere, setSelectedBiere] = useState('');
     const [selectedCommande, setSelectedCommande] = useState('');
 
-
     useEffect(() => {
         const loadData = async () => {
             try {
@@ -49,6 +48,25 @@ const BieresCommandesList = () => {
         }
     };
 
+    const handleAddBiereToExistingCommande = async (commandeId) => {
+        try {
+            await addBiereToCommande(selectedBiere, commandeId);
+            const updatedBieresCommandes = await fetchBieresCommandes();
+            setBieresCommandes(updatedBieresCommandes);
+        } catch (error) {
+            console.error('Failed to add biere to commande:', error);
+        }
+    };
+
+    const handleDeleteBiereFromCommande = async (biereCommandeId) => {
+        try {
+          await deleteBiereFromCommande(biereCommandeId);
+          setBieresCommandes(bieresCommandes.filter(biereCommande => biereCommande.id !== biereCommandeId));
+        } catch (error) {
+          console.error('Failed to delete biere from commande:', error);
+        }
+      };
+      
     const getBiereName = (biereId) => {
         const biere = bieresList.find(biere => biere.id === biereId);
         return biere ? biere.name : 'Inconnu';
@@ -74,7 +92,7 @@ const BieresCommandesList = () => {
                     >
                         <option value="">Sélectionner une bière</option>
                         {bieresList.map(biere => (
-                            <option key={biere.id} value={biere.id}>{biere.name}</option>
+                            <option key={biere.id} value={biere.id}>{biere.name} (ID: {biere.id})</option>
                         ))}
                     </select>
                 </div>
@@ -87,13 +105,15 @@ const BieresCommandesList = () => {
                     >
                         <option value="">Sélectionner une commande</option>
                         {commandesList.map(commande => (
-                            <option key={commande.id} value={commande.id}>{commande.name}</option>
+                            <option key={commande.id} value={commande.id}>
+                                {commande.name} (ID: {commande.id})
+                            </option>
                         ))}
                     </select>
+                    <button className="btn btn-primary" onClick={handleAddBiereToExistingCommande}>
+                        Ajouter Bière à la Commande
+                    </button>
                 </div>
-            </div>
-            <div className="row">
-                <button className="btn btn-primary" onClick={handleAddBiereToCommande}>Ajouter Bière à la Commande</button>
             </div>
             <div className="row mt-4">
                 {bieresCommandes.map(biereCommande => (
@@ -107,7 +127,7 @@ const BieresCommandesList = () => {
                                 <p className="card-text text-muted small">
                                     <button
                                         className="btn btn-danger btn-sm"
-                                        onClick={(event) => handleDelete(biereCommande.id, event)}
+                                        onClick={() => handleDeleteBiereFromCommande(biereCommande.id)}
                                     >
                                         <FontAwesomeIcon icon={faTrash} />
                                     </button>
