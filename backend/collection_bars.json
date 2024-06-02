@@ -1,0 +1,81 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "bars",
+    "collectionId": "9b6802c0-8ca2-48ca-a746-e5ec64b07c57",
+    "dateExported": "2024-06-02T14:14:39.321Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "c0028f7d-fba1-491b-983f-4a94b5a30819",
+            "colId": "9b6802c0-8ca2-48ca-a746-e5ec64b07c57",
+            "containerId": "",
+            "name": "post enregistrer nvx bar",
+            "url": "http://localhost:3000/bars/",
+            "method": "POST",
+            "sortNum": 5000,
+            "created": "2024-05-29T11:31:06.478Z",
+            "modified": "2024-05-29T11:31:06.478Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "    {\"name\": \"birou\", \"address\":\"145 rue des saintes\", \"tel\":\"02-47-09-18-25\", \"email\":\"birou6@outlook.fr\", \"description\":\"prêt à vous endiabler sur la piste du dancefloor graçe au DJ COCO, ce bar atypique saura vous charmer\"}",
+                "form": []
+            }
+        },
+        {
+            "_id": "48d61bbd-0a85-403c-b278-171b700ef3ce",
+            "colId": "9b6802c0-8ca2-48ca-a746-e5ec64b07c57",
+            "containerId": "",
+            "name": "put MàJ bars",
+            "url": "http://localhost:3000/bars/2",
+            "method": "PUT",
+            "sortNum": 7500,
+            "created": "2024-05-29T11:31:28.642Z",
+            "modified": "2024-05-29T11:31:28.643Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"name\": \"birou\", \"address\":\"45 rue des saintes\", \"tel\":\"02-47-09-18-25\", \"email\":\"birou6@outlook.fr\", \"description\":\"prêt à vous endiabler sur la piste du dancefloor graçe au DJ COCO, ce bar atypique saura vous charmer\"}",
+                "form": []
+            }
+        },
+        {
+            "_id": "b38f53e9-af84-4aba-81ea-d0321670eae6",
+            "colId": "9b6802c0-8ca2-48ca-a746-e5ec64b07c57",
+            "containerId": "",
+            "name": "Delete bars",
+            "url": "http://localhost:3000/bars/9",
+            "method": "DELETE",
+            "sortNum": 8125,
+            "created": "2024-05-29T11:31:14.087Z",
+            "modified": "2024-05-29T11:31:14.087Z",
+            "headers": []
+        },
+        {
+            "_id": "25febe5e-f7f4-4e8c-a094-0bcdc2c46c56",
+            "colId": "9b6802c0-8ca2-48ca-a746-e5ec64b07c57",
+            "containerId": "",
+            "name": "get liste des bars",
+            "url": "http://localhost:3000/bars/",
+            "method": "GET",
+            "sortNum": 8750,
+            "created": "2024-05-29T11:30:56.265Z",
+            "modified": "2024-05-29T11:30:56.265Z",
+            "headers": []
+        },
+        {
+            "_id": "34c137a8-dd80-4016-ae5f-96672caa9a65",
+            "colId": "9b6802c0-8ca2-48ca-a746-e5ec64b07c57",
+            "containerId": "",
+            "name": "get liste d'un bar",
+            "url": "http://localhost:3000/bars/2",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-05-29T11:30:47.098Z",
+            "modified": "2024-05-29T11:30:47.098Z",
+            "headers": []
+        }
+    ],
+    "ref": "j6YLpHmIPC1N2DmpwpWrbGEBcBUSdGhDtUVIshLluQ1oVfmT2lvmMIWs0GqGRS3MxCfNEoSXknMDabRxMXXtjA"
+}

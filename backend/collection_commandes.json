@@ -1,0 +1,81 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "commandes",
+    "collectionId": "8dec8fce-0135-4c68-85c3-6e8b01da5cc0",
+    "dateExported": "2024-06-02T14:15:10.370Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "d75e77d8-e121-4243-9ff1-80ac0c1e49d1",
+            "colId": "8dec8fce-0135-4c68-85c3-6e8b01da5cc0",
+            "containerId": "",
+            "name": "post ajout commande a un bar",
+            "url": "http://localhost:3000/bars/2/commandes",
+            "method": "POST",
+            "sortNum": 5000,
+            "created": "2024-05-29T10:25:58.343Z",
+            "modified": "2024-06-02T11:20:42.064Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"name\":\"Team Dev\", \"price\":85, \"date\":20240501, \"status\":\"en cours\", \"bar_id\":9}",
+                "form": []
+            }
+        },
+        {
+            "_id": "048d888e-21b7-4b83-bf62-257d13168faa",
+            "colId": "8dec8fce-0135-4c68-85c3-6e8b01da5cc0",
+            "containerId": "",
+            "name": "put modifier une commande",
+            "url": "http://localhost:3000/commandes/1",
+            "method": "PUT",
+            "sortNum": 7500,
+            "created": "2024-05-29T11:58:26.229Z",
+            "modified": "2024-05-29T11:58:26.229Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"name\":\"Piscou\", \"price\":85, \"date\":20240529, \"status\":\"en cours\", \"bar_id\":2}",
+                "form": []
+            }
+        },
+        {
+            "_id": "fa619184-be05-43d1-a3b3-56cb0b97638c",
+            "colId": "8dec8fce-0135-4c68-85c3-6e8b01da5cc0",
+            "containerId": "",
+            "name": "delete commande d'un bar",
+            "url": "http://localhost:3000/commandes/63",
+            "method": "DELETE",
+            "sortNum": 10000,
+            "created": "2024-05-29T10:25:48.300Z",
+            "modified": "2024-06-02T11:30:14.900Z",
+            "headers": []
+        },
+        {
+            "_id": "316d1f16-3362-4253-b7b8-2eabb8f2ece6",
+            "colId": "8dec8fce-0135-4c68-85c3-6e8b01da5cc0",
+            "containerId": "",
+            "name": "get lister commandes d'un bar",
+            "url": "http://localhost:3000/bars/1/commandes/",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-05-29T11:37:50.174Z",
+            "modified": "2024-05-29T11:37:50.174Z",
+            "headers": []
+        },
+        {
+            "_id": "d4c896cf-35a2-48f8-9b14-5117da33ff11",
+            "colId": "8dec8fce-0135-4c68-85c3-6e8b01da5cc0",
+            "containerId": "",
+            "name": "get détail commande d'un bar",
+            "url": "http://localhost:3000/commandes/1",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-05-29T12:07:30.043Z",
+            "modified": "2024-06-02T09:56:03.079Z",
+            "headers": []
+        }
+    ],
+    "ref": "mRh-CAQGLtNvi7u0BWgg2R328_mLZdk6blS05P4UaNA8ULLk5xD8hb2yhQrSkbX8GNlCCmNcjCZEEjrLuWahiw"
+}

@@ -1,0 +1,52 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "biere-commande",
+    "collectionId": "d15c044f-44e4-4922-b35b-824cf6e74afd",
+    "dateExported": "2024-06-02T14:15:19.486Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "d6955551-7ab1-4003-8885-f261a894caf7",
+            "colId": "d15c044f-44e4-4922-b35b-824cf6e74afd",
+            "containerId": "",
+            "name": "post ajout biere a une commande",
+            "url": "http://localhost:3000/biere_commande/commandes/8/bieres/8",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-05-29T11:36:22.098Z",
+            "modified": "2024-06-01T17:03:53.677Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"biere_id\":\"3\",\"commande_id\":\"5\"}\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "416a0716-5c9f-47a3-8c92-657c1e4da585",
+            "colId": "d15c044f-44e4-4922-b35b-824cf6e74afd",
+            "containerId": "",
+            "name": "del supprimer une biere d'une commande",
+            "url": "http://localhost:3000/biere_commande/8",
+            "method": "DELETE",
+            "sortNum": 20000,
+            "created": "2024-05-29T12:33:48.462Z",
+            "modified": "2024-06-01T17:04:08.100Z",
+            "headers": []
+        },
+        {
+            "_id": "8b679023-0a43-4418-bd89-0bc78ab1139c",
+            "colId": "d15c044f-44e4-4922-b35b-824cf6e74afd",
+            "containerId": "",
+            "name": "get permet de voir l'ensemble des bieres commandées",
+            "url": "http://localhost:3000/biere_commande",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-06-01T20:51:10.682Z",
+            "modified": "2024-06-02T13:46:44.359Z",
+            "headers": []
+        }
+    ],
+    "ref": "4Z2DTxPJSJ5MLo0weta_QQtZ7zKEWs_PwRu49tnweTur1hQi2ZZ4iaxklIh-YbvxMG80UIh3hAnK3-BBFd3NMg"
+}

@@ -1,0 +1,81 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "bieres",
+    "collectionId": "d408d6d3-4899-4bb1-a2f8-1181ad4858e4",
+    "dateExported": "2024-06-02T14:14:59.100Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "a7aad05a-4e37-49f2-bc58-a9144d513324",
+            "colId": "d408d6d3-4899-4bb1-a2f8-1181ad4858e4",
+            "containerId": "",
+            "name": "post enregistrer biere dans bar",
+            "url": "http://localhost:3000/bars/1/bieres/",
+            "method": "POST",
+            "sortNum": 5000,
+            "created": "2024-05-29T11:31:50.561Z",
+            "modified": "2024-05-29T12:16:52.890Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "  {\n    \"name\": \"Heineken\",\n    \"description\": \"Biere Blonde qui saura ravir vos papilles\",\n    \"degree\": 3,\n    \"price\": 5,\n    \"bar_id\": 8\n  }",
+                "form": []
+            }
+        },
+        {
+            "_id": "80d7fd4e-e49c-4392-8487-03f92fa73880",
+            "colId": "d408d6d3-4899-4bb1-a2f8-1181ad4858e4",
+            "containerId": "",
+            "name": "put MàJ biere",
+            "url": "http://localhost:3000/bieres/2",
+            "method": "PUT",
+            "sortNum": 10000,
+            "created": "2024-05-29T11:31:44.297Z",
+            "modified": "2024-05-29T12:16:20.898Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "\n  {\n    \"name\": \"Heineken\",\n    \"description\": \"Biere Blonde qui saura ravir vos papilles\",\n    \"degree\": 3,\n    \"price\": 5,\n    \"bar_id\": 3\n  }",
+                "form": []
+            }
+        },
+        {
+            "_id": "2f2cb66f-18cc-4801-a470-33bc0fc98207",
+            "colId": "d408d6d3-4899-4bb1-a2f8-1181ad4858e4",
+            "containerId": "",
+            "name": "get bieres all",
+            "url": "http://localhost:3000/bieres/",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-05-29T11:32:07.439Z",
+            "modified": "2024-05-29T11:32:07.439Z",
+            "headers": []
+        },
+        {
+            "_id": "047a715e-0d52-4682-a396-c671157e394c",
+            "colId": "d408d6d3-4899-4bb1-a2f8-1181ad4858e4",
+            "containerId": "",
+            "name": "get liste bieres bar",
+            "url": "http://localhost:3000/bars/1/bieres/",
+            "method": "GET",
+            "sortNum": 25000,
+            "created": "2024-05-29T11:32:15.559Z",
+            "modified": "2024-05-29T11:32:15.559Z",
+            "headers": []
+        },
+        {
+            "_id": "533c92ed-28dd-485d-80ab-66b06c574611",
+            "colId": "d408d6d3-4899-4bb1-a2f8-1181ad4858e4",
+            "containerId": "",
+            "name": "get afficher bieres id",
+            "url": "http://localhost:3000/bieres/1",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-05-29T11:32:02.779Z",
+            "modified": "2024-06-02T14:11:29.143Z",
+            "headers": []
+        }
+    ],
+    "ref": "SQZrLNJUalvFL41fsr-_nD0ZzpY4ydaF-bZKu32QGyE5X34u2dT7mL2gDRCN85s4ifhxC01htEOB-EOvgSWz0w"
+}
