@@ -19,7 +19,7 @@ const Commande = sequelize.define('Commande',{
         allowNull: false,
         get() {
             const rawValue = this.getDataValue('date');
-            return rawValue ? rawValue.toISOString().split('T')[0] : null; // Formater la date en YYYY-MM-DD
+            return rawValue ? rawValue.split('T')[0] : null;
         },
         set(value) {
             if (value) {

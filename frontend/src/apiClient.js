@@ -8,6 +8,7 @@ async function handleResponse(response) {
   return response.json();
 }
 
+// Bars
 export async function fetchBars() {
   try {
     const response = await fetch(`${API_BASE_URL}/bars`);
@@ -69,6 +70,7 @@ export async function deleteBar(id) {
   }
 }
 
+// Bières
 export async function fetchBieres() {
   try {
     const response = await fetch(`${API_BASE_URL}/bieres`);
@@ -81,7 +83,7 @@ export async function fetchBieres() {
 
 export async function fetchBiere(id) {
   try {
-    const response = await fetch(`${API_BASE_URL}/bieres/${id}`);
+    const response = await fetch(`${API_BASE_URL}/biere/${id}`);
     return await handleResponse(response);
   } catch (error) {
     console.error(`Failed to fetch biere with id ${id}:`, error);
@@ -91,7 +93,7 @@ export async function fetchBiere(id) {
 
 export async function addBiere(biere) {
   try {
-    const response = await fetch(`${API_BASE_URL}/bieres`, {
+    const response = await fetch(`${API_BASE_URL}/bars/:id/bieres/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(biere)
@@ -130,9 +132,10 @@ export async function deleteBiere(id) {
   }
 }
 
-export async function fetchCommandes() {
+// Commandes
+export async function fetchCommandes(commandes) {
   try {
-    const response = await fetch(`${API_BASE_URL}/commandes`);
+    const response = await fetch(`${API_BASE_URL}/bars/:bar_id/commandes`);
     return await handleResponse(response);
   } catch (error) {
     console.error('Failed to fetch commandes:', error);
@@ -140,7 +143,7 @@ export async function fetchCommandes() {
   }
 }
 
-export async function fetchCommande(id) {
+export async function fetchCommande(id, commande) {
   try {
     const response = await fetch(`${API_BASE_URL}/commandes/${id}`);
     return await handleResponse(response);
@@ -152,7 +155,7 @@ export async function fetchCommande(id) {
 
 export async function addCommande(commande) {
   try {
-    const response = await fetch(`${API_BASE_URL}/commandes`, {
+    const response = await fetch(`${API_BASE_URL}/bars/bar_id/commandes`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(commande)
@@ -178,6 +181,21 @@ export async function updateCommande(id, commande) {
   }
 }
 
+
+export async function updateCommandeStatus(id, status) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/commandes/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status })
+    });
+    return await handleResponse(response);
+  } catch (error) {
+    console.error(`Failed to update commande status with id ${id}:`, error);
+    throw error;
+  }
+}
+
 export async function deleteCommande(id) {
   try {
     const response = await fetch(`${API_BASE_URL}/commandes/${id}`, { method: 'DELETE' });
@@ -191,6 +209,7 @@ export async function deleteCommande(id) {
   }
 }
 
+// Bières Commandes
 export async function fetchBieresCommandes() {
   try {
     const response = await fetch(`${API_BASE_URL}/biere_commande`);
@@ -201,20 +220,19 @@ export async function fetchBieresCommandes() {
   }
 }
 
-export async function fetchBiereCommande() {
+export async function fetchBiereCommande(id) {
   try {
-    const response = await fetch(`${API_BASE_URL}/biere_commandes`); // Mise à jour de l'URL
+    const response = await fetch(`${API_BASE_URL}/biere_commandes/${id}`);
     return await handleResponse(response);
   } catch (error) {
-    console.error('Failed to fetch bieres commandes:', error);
+    console.error(`Failed to fetch biere commande with id ${id}:`, error);
     throw error;
   }
 }
 
-// Correction de l'URL pour addBiereToCommande
 export async function addBiereToCommande(commandeId, biereId) {
   try {
-    const response = await fetch(`${API_BASE_URL}/biere_commandes/commandes/${commandeId}/bieres/${biereId}`, { // Mise à jour de l'URL
+    const response = await fetch(`${API_BASE_URL}/biere_commandes/commandes/${commandeId}/bieres/${biereId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ commande_id: commandeId, biere_id: biereId })
@@ -225,24 +243,24 @@ export async function addBiereToCommande(commandeId, biereId) {
     throw error;
   }
 }
-export async function updateBiereCommande(id, biere_commandes) {
+
+export async function updateBiereCommande(id, biereCommande) {
   try {
     const response = await fetch(`${API_BASE_URL}/biere_commandes/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(commande)
+      body: JSON.stringify(biereCommande)
     });
     return await handleResponse(response);
   } catch (error) {
-    console.error(`Failed to update commande with id ${id}:`, error);
+    console.error(`Failed to update biere commande with id ${id}:`, error);
     throw error;
   }
 }
 
-// Correction de l'URL pour removeBiereFromCommande
-export async function removeBiereFromCommande(biereCommandeId) {
+export async function deleteBiereFromCommande(biereCommandeId) {
   try {
-    const response = await fetch(`${API_BASE_URL}/biere_commandes/${biereCommandeId}`, { // Mise à jour de l'URL
+    const response = await fetch(`${API_BASE_URL}/biere_commandes/${biereCommandeId}`, {
       method: 'DELETE'
     });
     if (!response.ok) {
@@ -251,22 +269,6 @@ export async function removeBiereFromCommande(biereCommandeId) {
     }
   } catch (error) {
     console.error(`Failed to remove biere from commande with id ${biereCommandeId}:`, error);
-    throw error;
-  }
-}
-
-// Correction de l'URL pour deleteBiereFromCommande
-export async function deleteBiereFromCommande(id) {
-  try {
-    const response = await fetch(`${API_BASE_URL}/biere_commandes/${id}`, { // Mise à jour de l'URL
-      method: 'DELETE'
-    });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'Failed to delete biere from commande');
-    }
-  } catch (error) {
-    console.error(`Failed to delete biere from commande with id ${id}:`, error);
     throw error;
   }
 }

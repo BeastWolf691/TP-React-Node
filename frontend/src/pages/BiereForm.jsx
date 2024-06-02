@@ -10,8 +10,7 @@ const BiereForm = () => {
     description: '',
     degree: '',
     price: '',
-    bar_id: '',
-    rating: ''
+    bar_id: ''
   });
 
   useEffect(() => {
@@ -24,7 +23,6 @@ const BiereForm = () => {
           degree: fetchedBiere.degree,
           price: fetchedBiere.price,
           bar_id: fetchedBiere.bar_id,
-          rating: fetchedBiere.rating
         });
       };
       loadBiere();
@@ -100,16 +98,6 @@ const BiereForm = () => {
           onChange={handleChange}
         />
         </div>
-      <div className="mb-3">
-        <label className="form-label">Rating</label>
-        <input
-          type="number"
-          name="rating"
-          className="form-control"
-          value={biere.rating}
-          onChange={handleChange}
-        />
-      </div>
       <button type="submit" className="btn btn-primary">Enregistrement</button>
       <button type="button" className="btn btn-secondary" onClick={handleBack}>Retour</button>
     </form>

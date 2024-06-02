@@ -1,32 +1,45 @@
-// commandelist.jsx
 import React, { useEffect, useState } from 'react';
-import { fetchCommandes, deleteCommande, fetchBieres, fetchBars } from '../apiClient.js';
+import { fetchCommandes, deleteCommande, updateCommandeStatus } from '../apiClient.js';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ROUTE_COMMANDEFORM_DYNAMIC } from '../constante';
 
 const CommandesList = () => {
-  const [commandesList, setCommandes] = useState([]);
-  const [bieresList, setBieres] = useState([]);
-  const [barsList, setBars] = useState([]);
+  const [commandesList, setCommandesList] = useState([]);
+  const [statusFilter, setStatusFilter] = useState('all');
 
   useEffect(() => {
-    const loadCommandesAndBieresAndBars = async () => {
-      const commandesData = await fetchCommandes();
-      const bieresData = await fetchBieres();
-      const barsData = await fetchBars();
-      setCommandes(commandesData);
-      setBieres(bieresData);
-      setBars(barsData);
+    const fetchData = async () => {
+      try {
+        const commandesData = await fetchCommandes();
+        setCommandesList(commandesData);
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
     };
-    loadCommandesAndBieresAndBars();
+    fetchData();
   }, []);
 
-  const handleDelete = async (id, e) => {
-    e.preventDefault();
-    await deleteCommande(id);
-    setCommandes(commandesList.filter(commande => commande.id !== id));
+  const handleDelete = async (id) => {
+    try {
+      await deleteCommande(id);
+      setCommandesList(commandesList.filter(commande => commande.id !== id));
+    } catch (error) {
+      console.error('Failed to delete commande:', error);
+    }
+  };
+
+  const handleStatusToggle = async (id, currentStatus) => {
+    const newStatus = currentStatus === 'en cours' ? 'fini' : 'en cours';
+    try {
+      await updateCommandeStatus(id, newStatus);
+      setCommandesList(commandesList.map(commande =>
+        commande.id === id ? { ...commande, status: newStatus } : commande
+      ));
+    } catch (error) {
+      console.error('Failed to update commande status:', error);
+    }
   };
 
   const getBarName = (barId) => {
@@ -34,41 +47,57 @@ const CommandesList = () => {
     return bar ? bar.name : 'Unknown';
   };
 
+  const filteredCommandes = statusFilter === 'all'
+    ? commandesList
+    : commandesList.filter(commande => commande.status === statusFilter);
+
   return (
     <div className="container my-4">
-      <div className="d-flex justify-content-end mb-4">
+      <div className="d-flex justify-content-between mb-4">
+        <div>
+          <label className="form-label me-2">Filtrer par statut : </label>
+          <select
+            className="form-select d-inline-block w-auto"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
+            <option value="all">Tous</option>
+            <option value="en cours">En cours</option>
+            <option value="fini">Fini</option>
+          </select>
+        </div>
         <Link to={ROUTE_COMMANDEFORM_DYNAMIC} className="btn btn-primary">Ajouter une Commande</Link>
       </div>
       <div className="row">
-        {commandesList.map(commande => {
-          return (
-            <div className="col-md-3 mb-4" key={commande.id}>
-              <div className="card h-100">
-                <div className="card-body">
-                  <h3 className="card-title">Commande : {commande.id}</h3>
-                  <p className='description'>
-                    Nom : {commande.name}<br/>
-                    Prix : {commande.price}€<br/>
-                    Nom du Bar : {getBarName(commande.bar_id)}<br/>
-                    Date : {commande.date}<br/>
-                    Status : {commande.status}<br/>
-                  </p>
-                  <p className="card-text text-muted small">
-                    <br />
-                    <span className='position-absolute' style={{ right: 8, bottom: 8 }} >
-                      <button
-                        className="btn btn-danger btn-sm"
-                        onClick={(event) => handleDelete(commande.id, event)}
-                      >
-                        <FontAwesomeIcon icon={faTrash} />
-                      </button>
-                    </span>
-                  </p>
+        {filteredCommandes.map(commande => (
+          <div className="col-md-3 mb-4" key={commande.id}>
+            <div className="card h-100">
+              <div className="card-body">
+                <h3 className="card-title">Commande : {commande.id}</h3>
+                <p className='description'>
+                  Nom : {commande.name}<br />
+                  Prix : {commande.price}€<br />
+                  {/* Ajoutez ici le reste des informations */}
+                  Status : {commande.status}<br />
+                </p>
+                <div className="d-flex justify-content-between">
+                  <button
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => handleStatusToggle(commande.id, commande.status)}
+                  >
+                    Basculer statut
+                  </button>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => handleDelete(commande.id)}
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
                 </div>
               </div>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </div>
   );

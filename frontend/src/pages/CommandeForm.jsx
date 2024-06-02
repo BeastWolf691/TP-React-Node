@@ -10,7 +10,7 @@ const CommandeForm = () => {
     price: '',
     bar_id: '',
     date: '',
-    status: '',
+    status: 'en cours', // Définir la valeur par défaut du statut
   });
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const CommandeForm = () => {
   };
 
   const handleBack = () => {
-    navigate('/commandelist'); // permet de revenir sur la page précèdente
+    navigate('/commandelist'); // permet de revenir sur la page précédente
   };
 
   return (
@@ -66,6 +66,7 @@ const CommandeForm = () => {
         <label className="form-label">Prix total: </label>
         <input
           name="price"
+          type="number"
           className="form-control"
           value={commande.price}
           onChange={handleChange}
@@ -75,6 +76,7 @@ const CommandeForm = () => {
         <label className="form-label">bar_id : </label>
         <input
           name="bar_id"
+          type="number"
           className="form-control"
           value={commande.bar_id}
           onChange={handleChange}
@@ -84,6 +86,7 @@ const CommandeForm = () => {
         <label className="form-label">Date : </label>
         <input
           name="date"
+          type="date"
           className="form-control"
           value={commande.date}
           onChange={handleChange}
@@ -91,12 +94,15 @@ const CommandeForm = () => {
       </div>
       <div className="mb-3">
         <label className="form-label">Status : </label>
-        <input
+        <select
           name="status"
           className="form-control"
           value={commande.status}
           onChange={handleChange}
-        />
+        >
+          <option value="en cours">En cours</option>
+          <option value="fini">Fini</option>
+        </select>
       </div>
       <button type="submit" className="btn btn-primary">Enregistrement</button>
       <button type="button" className="btn btn-secondary" onClick={handleBack}>Retour</button>
