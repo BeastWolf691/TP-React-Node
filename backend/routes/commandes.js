@@ -12,6 +12,15 @@ router.get('/bars/:bar_id/commandes', async (req, res) => {
     }
 });
 
+// Liste des commandes d'une bière
+router.get('/biere/:id/commandes', async (req, res) => {
+    try {
+        const commandes = await Commande.findAll({ where: { biere_id: req.params.id } });
+        res.json(commandes);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
 
 // Obtenir une commande par ID
 router.get('/commandes/:id', async (req, res) => {
@@ -27,6 +36,15 @@ router.get('/commandes/:id', async (req, res) => {
     }
 });
 
+// Liste de toutes les commandes
+router.get('/commandes/', async (req, res) => {
+    try {
+        const commandes = await Commande.findAll();
+        res.json(commandes);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
 
 // Ajouter une commande à un bar
 router.post('/bars/:bar_id/commandes', async (req, res) => {

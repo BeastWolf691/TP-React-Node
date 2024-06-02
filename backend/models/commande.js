@@ -17,15 +17,15 @@ const Commande = sequelize.define('Commande',{
     date: {
         type: DataTypes.DATEONLY, // Utilisation de DATEONLY pour stocker uniquement la date sans l'heure
         allowNull: false,
-        get() {
-            const rawValue = this.getDataValue('date');
-            return rawValue ? rawValue.split('T')[0] : null;
-        },
-        set(value) {
-            if (value) {
-                this.setDataValue('date', value); // Stocker la date directement au format YYYY-MM-DD
-            }
-        }
+        // get() {
+        //     const rawValue = this.getDataValue('date');
+        //     return rawValue ? rawValue.split('T')[0] : null;
+        // },
+        // set(value) {
+        //     if (value) {
+        //         this.setDataValue('date', value); // Stocker la date directement au format YYYY-MM-DD
+        //     }
+        // }
     },
 
     status: {

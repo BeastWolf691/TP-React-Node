@@ -83,7 +83,7 @@ export async function fetchBieres() {
 
 export async function fetchBiere(id) {
   try {
-    const response = await fetch(`${API_BASE_URL}/biere/${id}`);
+    const response = await fetch(`${API_BASE_URL}/bieres/${id}`);
     return await handleResponse(response);
   } catch (error) {
     console.error(`Failed to fetch biere with id ${id}:`, error);
@@ -133,9 +133,9 @@ export async function deleteBiere(id) {
 }
 
 // Commandes
-export async function fetchCommandes(commandes) {
+export async function fetchCommandes() {
   try {
-    const response = await fetch(`${API_BASE_URL}/bars/:bar_id/commandes`);
+    const response = await fetch(`${API_BASE_URL}/commandes/`);
     return await handleResponse(response);
   } catch (error) {
     console.error('Failed to fetch commandes:', error);
@@ -143,7 +143,7 @@ export async function fetchCommandes(commandes) {
   }
 }
 
-export async function fetchCommande(id, commande) {
+export async function fetchCommande(id) {
   try {
     const response = await fetch(`${API_BASE_URL}/commandes/${id}`);
     return await handleResponse(response);
@@ -181,20 +181,6 @@ export async function updateCommande(id, commande) {
   }
 }
 
-
-export async function updateCommandeStatus(id, status) {
-  try {
-    const response = await fetch(`${API_BASE_URL}/commandes/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status })
-    });
-    return await handleResponse(response);
-  } catch (error) {
-    console.error(`Failed to update commande status with id ${id}:`, error);
-    throw error;
-  }
-}
 
 export async function deleteCommande(id) {
   try {

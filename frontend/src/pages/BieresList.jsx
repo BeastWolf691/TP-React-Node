@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchBieres, deleteBiere, fetchBars } from '../apiClient.js'; // Assurez-vous d'avoir une fonction fetchBars
-// import StarRating from '../components/StarRating.jsx';
+import { fetchBieres, deleteBiere, fetchBars } from '../apiClient.js';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
@@ -40,7 +39,6 @@ const BieresList = () => {
         {BieresList.map(biere => (
           <div className="col-md-3 mb-4" key={biere.id}>
             <div className="card h-100">
-              {/* <div className="text-center"><StarRating rating={biere.rating} /></div> */}
               <div className="card-body">
                 <h3 className="card-title">Nom : {biere.name}</h3>
                 <p className='description'>
